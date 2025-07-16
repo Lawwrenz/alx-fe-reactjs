@@ -1,5 +1,5 @@
  import React, { useContext } from 'react';
- import UserContext from './UserContext';
+ import UserContext from '../contexts/UserContext';
  
  const UserProfile = (props) => {
   const { name, age, bio } = useContext(UserContext);
