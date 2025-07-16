@@ -5,10 +5,12 @@ export default function Navbar() {
     <nav>
       <ul style={{
         display: "flex",
+        justifyContent: "center", // Added missing property
         gap: "1rem",
         listStyle: "none",
         padding: "1rem",
-        background: "#f0f0f0"
+        backgroundColor: "#f0f0f0", // Changed from 'background' to 'backgroundColor'
+        margin: 0 // Added for better spacing
       }}>
         <li>
           <Link to="/">Home</Link>
