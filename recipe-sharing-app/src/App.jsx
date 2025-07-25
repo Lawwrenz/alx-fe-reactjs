@@ -1,6 +1,7 @@
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
-import { Outlet, Router, Path, Route, Routes } from 'react-router-dom';
+import { Outlet, Routes, Route } from 'react-router-dom';
+import RecipeDetails from './components/RecipeDetails';
 import './App.css';
 
 function App() {
@@ -11,8 +12,11 @@ function App() {
       </header>
       <main>
         <AddRecipeForm />
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+        </Routes>
         <Outlet />
-        <RecipeList />
       </main>
     </div>
   );
