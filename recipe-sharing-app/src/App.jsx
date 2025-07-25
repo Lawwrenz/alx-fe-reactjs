@@ -1,5 +1,6 @@
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       </header>
       <main>
         <AddRecipeForm />
+        <Outlet />
         <RecipeList />
       </main>
     </div>
