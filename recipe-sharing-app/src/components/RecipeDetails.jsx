@@ -7,13 +7,19 @@ const RecipeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const recipeId = parseInt(id);
-  const recipe = useRecipeStore((state) =>
-    state.recipes.find((recipe) => recipe.id === recipeId)
-  );
+  const { 
+    recipes,
+    favorites,
+    addFavorite,
+    removeFavorite
+  } = useRecipeStore();
+  const recipe = recipes.find((recipe) => recipe.id === recipeId);
 
   if (!recipe) {
     return <div>Recipe not found</div>;
   }
+
+  const isFavorite = favorites.includes(recipe.id);
 
   return (
     <div className="recipe-details">
@@ -22,6 +28,14 @@ const RecipeDetails = () => {
       </button>
       <h1>{recipe.title}</h1>
       <p>{recipe.description}</p>
+      
+      <button 
+        onClick={() => isFavorite ? removeFavorite(recipe.id) : addFavorite(recipe.id)}
+        className={`favorite-button ${isFavorite ? 'active' : ''}`}
+      >
+        {isFavorite ? '★ Remove from Favorites' : '☆ Add to Favorites'}
+      </button>
+      
       <div className="recipe-actions">
         <EditRecipeForm recipe={recipe} />
         <DeleteRecipeButton recipeId={recipe.id} />
