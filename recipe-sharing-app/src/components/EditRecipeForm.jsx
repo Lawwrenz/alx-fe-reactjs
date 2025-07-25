@@ -11,7 +11,12 @@ const EditRecipeForm = ({ recipe }) => {
     if (!title.trim() || !description.trim()) return;
     
     updateRecipe(recipe.id, { title, description });
+
+    updateRecipe(recipe.id, { title, description });
+  alert('Recipe updated successfully!');
   };
+
+  
 
   return (
     <form onSubmit={handleSubmit} className="edit-form">
