@@ -170,4 +170,22 @@ body {
   .user-stats {
     grid-template-columns: 1fr;
   }
+
+  .status-message {
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.status-message.loading {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.status-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
 }

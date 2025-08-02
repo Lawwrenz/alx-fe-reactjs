@@ -14,11 +14,13 @@ export default function Search() {
     
     setLoading(true);
     setError(null);
+    setUserData(null);
+    
     try {
       const data = await fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError("Looks like we can't find the user"); // This line sets the exact required message
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
@@ -33,26 +35,33 @@ export default function Search() {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter GitHub username"
           className="search-input"
+          disabled={loading}
         />
         <button 
           type="submit" 
           disabled={loading}
           className="search-button"
         >
-          Search
+          {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
 
-      {loading && <p className="loading-message">Loading...</p>}
-      
-      {/* This is where the error message displays */}
-      {error && (
-        <div className="error-message">
-          Looks like we can't find the user
+      {/* Loading State */}
+      {loading && (
+        <div className="status-message loading">
+          <p>Loading...</p>
         </div>
       )}
 
-      {userData && (
+      {/* Error State */}
+      {error && !loading && (
+        <div className="status-message error">
+          <p>Looks like we can't find the user</p>
+        </div>
+      )}
+
+      {/* Success State */}
+      {userData && !loading && !error && (
         <div className="user-card">
           <div className="user-header">
             <img 
