@@ -18,8 +18,7 @@ export default function Search() {
       const data = await fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError("Looks like we can't find the user"); // Exact error message as required
-      setUserData(null);
+      setError("Looks like we can't find the user"); // This line sets the exact required message
     } finally {
       setLoading(false);
     }
@@ -46,10 +45,11 @@ export default function Search() {
 
       {loading && <p className="loading-message">Loading...</p>}
       
+      {/* This is where the error message displays */}
       {error && (
-        <p className="error-message">
-          Looks like we can't find the user {/* Displayed exactly as required */}
-        </p>
+        <div className="error-message">
+          Looks like we can't find the user
+        </div>
       )}
 
       {userData && (
