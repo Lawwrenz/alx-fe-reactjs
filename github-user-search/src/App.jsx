@@ -1,14 +1,14 @@
-import SearchUser from './components/SearchUser';
+import SearchUser from './components/Search';
+import Search from './components/Search'
+import './App.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto py-6 px-4">
-          <h1 className="text-3xl font-bold text-gray-900">GitHub User Search</h1>
-        </div>
+    <div className="app-container">
+      <header className="app-header">
+        <h1 className="app-title">GitHub User Search</h1>
       </header>
-      <main className="max-w-7xl mx-auto py-6 px-4">
+      <main>
         <SearchUser />
       </main>
     </div>
