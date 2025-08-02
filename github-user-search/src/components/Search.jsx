@@ -64,7 +64,7 @@ export default function Search() {
             name="username"
             value={searchData.username}
             onChange={handleChange}
-            placeholder="e.g. torvalds"
+            placeholder="e.g. Lawrence"
             required
           />
         </div>
