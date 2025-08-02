@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 import '../App.css';
 
-export default function SearchUser() {
+export default function Search() {
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function SearchUser() {
       const data = await fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError('Looks like we can\'t find the user');
+      setError("Looks like we can't find the user"); // Exact error message as required
       setUserData(null);
     } finally {
       setLoading(false);
@@ -45,7 +45,12 @@ export default function SearchUser() {
       </form>
 
       {loading && <p className="loading-message">Loading...</p>}
-      {error && <p className="error-message">{error}</p>}
+      
+      {error && (
+        <p className="error-message">
+          Looks like we can't find the user {/* Displayed exactly as required */}
+        </p>
+      )}
 
       {userData && (
         <div className="user-card">
