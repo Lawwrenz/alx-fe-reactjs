@@ -3,22 +3,38 @@ import axios from "axios";
 const API_URL =
   import.meta.env.VITE_APP_GITHUB_API_URL || "https://api.github.com";
 
-export const searchUsers = async (query) => {
+export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(`${API_URL}/search/users?q=${query}`);
-    return response.data.items;
+    const response = await axios.get(`${API_URL}/users/${username}`);
+    return {
+      data: response.data,
+      error: null,
+    };
   } catch (error) {
-    console.error("Error searching users:", error);
-    return [];
+    if (error.response?.status === 404) {
+      return {
+        data: null,
+        error: "User not found",
+      };
+    }
+    return {
+      data: null,
+      error: "An error occurred while fetching user data",
+    };
   }
 };
 
-export const getUserDetails = async (username) => {
+export const searchUsers = async (query) => {
   try {
-    const response = await axios.get(`${API_URL}/users/${username}`);
-    return response.data;
+    const response = await axios.get(`${API_URL}/search/users?q=${query}`);
+    return {
+      data: response.data.items,
+      error: null,
+    };
   } catch (error) {
-    console.error("Error fetching user details:", error);
-    return null;
+    return {
+      data: null,
+      error: "An error occurred while searching",
+    };
   }
 };
