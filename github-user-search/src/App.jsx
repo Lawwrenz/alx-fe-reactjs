@@ -1,23 +1,56 @@
 import { useState } from 'react';
-import { fetchUserData } from './services/githubService';
+import { advancedSearchUsers } from './services/githubService';
 import SearchBar from './components/SearchBar';
+import UserCard from './components/UserCard';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [totalResults, setTotalResults] = useState(0);
+  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useState(null);
 
-  const handleSearch = async (username) => {
+  const handleSearch = async (params) => {
     setLoading(true);
     setError('');
-    const { data, error } = await fetchUserData(username);
+    setSearchParams(params);
+    setPage(1);
+    
+    const { data, total, error } = await advancedSearchUsers(params, 1);
     setLoading(false);
     
     if (error) {
       setError(error);
-      setUser(null);
+      setUsers([]);
+      setTotalResults(0);
     } else {
-      setUser(data);
+      setUsers(data);
+      setTotalResults(total);
+    }
+  };
+
+  const handleReset = () => {
+    setUsers([]);
+    setError('');
+    setTotalResults(0);
+    setPage(1);
+    setSearchParams(null);
+  };
+
+  const loadMore = async () => {
+    if (!searchParams) return;
+    
+    setLoading(true);
+    const nextPage = page + 1;
+    const { data, error } = await advancedSearchUsers(searchParams, nextPage);
+    setLoading(false);
+    
+    if (error) {
+      setError(error);
+    } else {
+      setUsers([...users, ...data]);
+      setPage(nextPage);
     }
   };
 
@@ -27,59 +60,55 @@ function App() {
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           GitHub User Search
         </h1>
-        <SearchBar onSearch={handleSearch} />
+        
+        <SearchBar onSearch={handleSearch} onReset={handleReset} />
         
         {loading && (
           <div className="text-center py-8">
-            <p className="text-gray-600">Loading...</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 mb-2"></div>
+            <p className="text-gray-600">Searching GitHub...</p>
           </div>
         )}
 
         {error && !loading && (
-          <div className="text-center py-8">
-            <p className="text-red-500">Looks like we can't find the user</p>
+          <div className="text-center py-8 bg-white rounded-lg shadow-md">
+            <p className="text-red-500">{error}</p>
           </div>
         )}
 
-        {user && !loading && (
-          <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-            <div className="flex items-center gap-4">
-              <img
-                src={user.avatar_url}
-                alt={user.login}
-                className="w-20 h-20 rounded-full"
-              />
-              <div>
-                <h2 className="text-xl font-bold">{user.name || user.login}</h2>
-                <p className="text-gray-600">{user.login}</p>
-                {user.bio && <p className="text-gray-500 mt-2">{user.bio}</p>}
-                <a
-                  href={user.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline mt-2 inline-block"
+        {users.length > 0 && (
+          <div className="mb-8">
+            <div className="mb-4 flex justify-between items-center">
+              <h2 className="text-xl font-semibold text-gray-700">
+                {totalResults.toLocaleString()} results found
+              </h2>
+              {users.length < totalResults && (
+                <button
+                  onClick={loadMore}
+                  disabled={loading}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
                 >
-                  View Profile
-                </a>
+                  {loading ? 'Loading...' : 'Load More'}
+                </button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {users.map((user) => (
+                <UserCard key={user.id} user={user} />
+              ))}
+            </div>
+
+            {users.length < totalResults && !loading && (
+              <div className="mt-6 text-center">
+                <button
+                  onClick={loadMore}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Load More ({totalResults - users.length} remaining)
+                </button>
               </div>
-            </div>
-            <div className="mt-4 flex gap-4 text-sm">
-              {user.followers && (
-                <p>
-                  <span className="font-semibold">{user.followers}</span> followers
-                </p>
-              )}
-              {user.following && (
-                <p>
-                  <span className="font-semibold">{user.following}</span> following
-                </p>
-              )}
-              {user.public_repos && (
-                <p>
-                  <span className="font-semibold">{user.public_repos}</span> repositories
-                </p>
-              )}
-            </div>
+            )}
           </div>
         )}
       </div>
