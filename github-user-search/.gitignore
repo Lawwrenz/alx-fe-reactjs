@@ -65,4 +65,4 @@ pnpm-lock.yaml
 
 # Vite specific
 *.env
-.env.*
+.env.*.env
