@@ -3,7 +3,7 @@ function UserProfile() {
     <div className="user-profile bg-gray-100 p-4 sm:p-4 md:p-8 max-w-xs md:max-w-sm sm:max-w-sm mx-auto my-8 sm:my-12 md:my-20 rounded-lg shadow-lg">
       <img
         src="https://via.placeholder.com/150"
-        className="rounded-full w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mx-auto"
+        className="rounded-full w-24 h-24 sm:w-24 sm:h-24 md:w-36 md:h-36 mx-auto"
         alt="User"
       />
       <h1 className="text-lg sm:text-xl md:text-xl text-blue-800 mt-4 mb-2 sm:mt-6 sm:mb-3 md:mt-8 md:mb-4">
