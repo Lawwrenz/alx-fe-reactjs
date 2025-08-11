@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://via.placeholder.com/300x200?text=Spaghetti+Carbonara"
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://via.placeholder.com/300x200?text=Chicken+Tikka"
+  },
+  {
+    "id": 3,
+    "title": "Vegetable Stir Fry",
+    "summary": "Quick and healthy stir-fried vegetables with a savory sauce, perfect for weeknight dinners.",
+    "image": "https://via.placeholder.com/300x200?text=Veg+Stir+Fry"
+  },
+  {
+    "id": 4,
+    "title": "Chocolate Chip Cookies",
+    "summary": "Classic homemade cookies with melty chocolate chips and a soft center.",
+    "image": "https://via.placeholder.com/300x200?text=Chocolate+Cookies"
+  },
+  {
+    "id": 5,
+    "title": "Avocado Toast",
+    "summary": "Simple yet delicious toast topped with mashed avocado, salt, and pepper.",
+    "image": "https://via.placeholder.com/300x200?text=Avocado+Toast"
+  },
+  {
+    "id": 6,
+    "title": "Beef Burger",
+    "summary": "Juicy beef patty with cheese, lettuce, and special sauce on a toasted bun.",
+    "image": "https://via.placeholder.com/300x200?text=Beef+Burger"
+  }
+]

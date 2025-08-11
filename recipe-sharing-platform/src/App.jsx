@@ -1,20 +1,17 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold text-blue-600 mb-4">
-        Welcome to Recipe Sharing Platform
-      </h1>
-      <p className="text-lg text-gray-700">
-        Share and discover amazing recipes from around the world!
-      </p>
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
