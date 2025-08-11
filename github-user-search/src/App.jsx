@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { advancedSearchUsers } from './services/githubService';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/Search';
 import UserCard from './components/UserCard';
 
 function App() {

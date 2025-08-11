@@ -127,4 +127,4 @@ const SearchBar = ({ onSearch, onReset }) => {
   );
 };
 
-export default SearchBar;
+export default Search;
