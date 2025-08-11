@@ -8,18 +8,17 @@ const AddRecipeForm = () => {
     summary: '',
     image: '',
     ingredients: '',
-    instructions: ''
+    steps: '' // Changed from 'instructions' to 'steps'
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; // Proper use of target.value
     setFormData({
       ...formData,
       [name]: value
     });
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -34,9 +33,8 @@ const AddRecipeForm = () => {
     if (!formData.title.trim()) newErrors.title = 'Recipe title is required';
     if (!formData.summary.trim()) newErrors.summary = 'Summary is required';
     if (!formData.ingredients.trim()) newErrors.ingredients = 'Ingredients are required';
-    if (!formData.instructions.trim()) newErrors.instructions = 'Instructions are required';
+    if (!formData.steps.trim()) newErrors.steps = 'Steps are required'; // Changed from 'instructions'
     
-    // Validate at least 2 ingredients
     if (formData.ingredients.trim() && formData.ingredients.split('\n').filter(i => i.trim()).length < 2) {
       newErrors.ingredients = 'Please enter at least 2 ingredients';
     }
@@ -51,16 +49,15 @@ const AddRecipeForm = () => {
     if (validateForm()) {
       setIsSubmitting(true);
       
-      // In a real app, you would send this to your backend API
-      // For now, we'll simulate submission and redirect
+      // Simulate form submission
       setTimeout(() => {
         console.log('Form submitted:', {
           ...formData,
           ingredients: formData.ingredients.split('\n').filter(i => i.trim()),
-          instructions: formData.instructions.split('\n').filter(i => i.trim())
+          steps: formData.steps.split('\n').filter(i => i.trim()) // Changed from 'instructions'
         });
         setIsSubmitting(false);
-        navigate('/'); // Redirect to home after submission
+        navigate('/');
       }, 1500);
     }
   };
@@ -144,23 +141,23 @@ const AddRecipeForm = () => {
             {errors.ingredients && <p className="mt-1 text-sm text-red-600">{errors.ingredients}</p>}
           </div>
 
-          {/* Instructions Field */}
+          {/* Steps Field (previously Instructions) */}
           <div>
-            <label htmlFor="instructions" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="steps" className="block text-sm font-medium text-gray-700 mb-1">
               Preparation Steps * (one per line)
             </label>
             <textarea
-              id="instructions"
-              name="instructions"
+              id="steps"
+              name="steps"
               rows="7"
-              value={formData.instructions}
+              value={formData.steps}
               onChange={handleChange}
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                errors.instructions ? 'border-red-500' : 'border-gray-300'
+                errors.steps ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="1. Preheat oven to 350°F\n2. Mix dry ingredients\n..."
             />
-            {errors.instructions && <p className="mt-1 text-sm text-red-600">{errors.instructions}</p>}
+            {errors.steps && <p className="mt-1 text-sm text-red-600">{errors.steps}</p>}
           </div>
 
           {/* Form Actions */}
