@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import RegistrationForm from './components/RegisterationForm.jsx';
-import FormikForm from './components/FormikForm.jsx';
+import RegistrationForm from './components/RegistrationForm';
+import FormikForm from './components/FormikForm';
 
 function App() {
   const [currentForm, setCurrentForm] = useState('controlled');
 
   return (
     <div className="min-h-screen bg-gray-100">
+      {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">React Form Demo</h1>
-              </div>
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold text-gray-900">React Form Demo</h1>
             </div>
             <div className="flex items-center space-x-4">
               <button
@@ -41,6 +40,7 @@ function App() {
         </div>
       </nav>
 
+      {/* Form Content */}
       {currentForm === 'controlled' ? <RegistrationForm /> : <FormikForm />}
     </div>
   );
