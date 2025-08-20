@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import RegistrationForm from './components/RegistrationForm';
-import FormikForm from './components/FormikForm';
+import FormikForm from './components/formikForm';
 
 function App() {
   const [currentForm, setCurrentForm] = useState('controlled');
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -40,7 +39,6 @@ function App() {
         </div>
       </nav>
 
-      {/* Form Content */}
       {currentForm === 'controlled' ? <RegistrationForm /> : <FormikForm />}
     </div>
   );
