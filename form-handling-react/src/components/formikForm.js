@@ -1,8 +1,23 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import "./FormikForm.css";
 
 const FormikForm = () => {
+  // Validation schema using Yup
+  const validationSchema = Yup.object({
+    username: Yup.string()
+      .required("Username is required")
+      .min(3, "Username must be at least 3 characters")
+      .max(20, "Username must be less than 20 characters"),
+    email: Yup.string()
+      .required("Email is required")
+      .email("Invalid email address"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters"),
+  });
+
   // Initial form values
   const initialValues = {
     username: "",
@@ -10,167 +25,101 @@ const FormikForm = () => {
     password: "",
   };
 
-  // Validation schema using Yup
-  const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
-
   // Handle form submission
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    console.log("Form data submitted:", values);
+
+    // Simulate API call
     setTimeout(() => {
-      console.log("Form submitted with Formik:", values);
-      alert("Registration successful with Formik!");
+      alert("Registration successful!");
       resetForm();
       setSubmitting(false);
-    }, 500);
+    }, 1000);
   };
 
+  // Using React.createElement instead of JSX
   return React.createElement(
     Formik,
     {
       initialValues: initialValues,
       validationSchema: validationSchema,
-      onSubmit: onSubmit,
+      onSubmit: handleSubmit,
     },
-    function ({ isSubmitting, errors, touched }) {
-      // Create class names with proper spacing
-      const usernameFieldClass = `relative block w-full px-3 py-2 border ${
-        errors.username && touched.username
-          ? "border-red-300"
-          : "border-gray-300"
-      } placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`;
-
-      const emailFieldClass = `relative block w-full px-3 py-2 border ${
-        errors.email && touched.email ? "border-red-300" : "border-gray-300"
-      } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`;
-
-      const passwordFieldClass = `relative block w-full px-3 py-2 border ${
-        errors.password && touched.password
-          ? "border-red-300"
-          : "border-gray-300"
-      } placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`;
+    (formikProps) => {
+      const { isSubmitting, errors, touched } = formikProps;
 
       return React.createElement(
-        "div",
-        {
-          className:
-            "min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8",
-        },
+        Form,
+        { className: "formik-form" },
+        // Title
+        React.createElement("h2", null, "User Registration (Formik)"),
+
+        // Username Field
         React.createElement(
           "div",
-          { className: "max-w-md w-full space-y-8" },
-          React.createElement(
-            "div",
-            null,
-            React.createElement(
-              "h2",
-              {
-                className:
-                  "mt-6 text-center text-3xl font-extrabold text-gray-900",
-              },
-              "User Registration"
-            ),
-            React.createElement(
-              "p",
-              { className: "mt-2 text-center text-sm text-gray-600" },
-              "Using Formik with Yup Validation"
-            )
-          ),
-          React.createElement(
-            Form,
-            { className: "mt-8 space-y-6" },
-            React.createElement(
-              "div",
-              { className: "rounded-md shadow-sm -space-y-px" },
-              // Username Field
-              React.createElement(
-                "div",
-                null,
-                React.createElement(
-                  "label",
-                  { htmlFor: "username", className: "sr-only" },
-                  "Username"
-                ),
-                React.createElement(Field, {
-                  id: "username",
-                  name: "username",
-                  type: "text",
-                  className: usernameFieldClass,
-                  placeholder: "Username",
-                }),
-                React.createElement(ErrorMessage, {
-                  name: "username",
-                  component: "div",
-                  className: "mt-1 text-sm text-red-600",
-                })
-              ),
+          { className: "form-group" },
+          React.createElement("label", { htmlFor: "username" }, "Username:"),
+          React.createElement(Field, {
+            type: "text",
+            id: "username",
+            name: "username",
+            className: errors.username && touched.username ? "error" : "",
+            placeholder: "Enter your username",
+          }),
+          React.createElement(ErrorMessage, {
+            name: "username",
+            component: "div",
+            className: "error-message",
+          })
+        ),
 
-              // Email Field
-              React.createElement(
-                "div",
-                null,
-                React.createElement(
-                  "label",
-                  { htmlFor: "email", className: "sr-only" },
-                  "Email address"
-                ),
-                React.createElement(Field, {
-                  id: "email",
-                  name: "email",
-                  type: "email",
-                  className: emailFieldClass,
-                  placeholder: "Email address",
-                }),
-                React.createElement(ErrorMessage, {
-                  name: "email",
-                  component: "div",
-                  className: "mt-1 text-sm text-red-600",
-                })
-              ),
+        // Email Field
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement("label", { htmlFor: "email" }, "Email:"),
+          React.createElement(Field, {
+            type: "email",
+            id: "email",
+            name: "email",
+            className: errors.email && touched.email ? "error" : "",
+            placeholder: "Enter your email",
+          }),
+          React.createElement(ErrorMessage, {
+            name: "email",
+            component: "div",
+            className: "error-message",
+          })
+        ),
 
-              // Password Field
-              React.createElement(
-                "div",
-                null,
-                React.createElement(
-                  "label",
-                  { htmlFor: "password", className: "sr-only" },
-                  "Password"
-                ),
-                React.createElement(Field, {
-                  id: "password",
-                  name: "password",
-                  type: "password",
-                  className: passwordFieldClass,
-                  placeholder: "Password",
-                }),
-                React.createElement(ErrorMessage, {
-                  name: "password",
-                  component: "div",
-                  className: "mt-1 text-sm text-red-600",
-                })
-              )
-            ),
+        // Password Field
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement("label", { htmlFor: "password" }, "Password:"),
+          React.createElement(Field, {
+            type: "password",
+            id: "password",
+            name: "password",
+            className: errors.password && touched.password ? "error" : "",
+            placeholder: "Enter your password",
+          }),
+          React.createElement(ErrorMessage, {
+            name: "password",
+            component: "div",
+            className: "error-message",
+          })
+        ),
 
-            React.createElement(
-              "div",
-              null,
-              React.createElement(
-                "button",
-                {
-                  type: "submit",
-                  disabled: isSubmitting,
-                  className:
-                    "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed",
-                },
-                isSubmitting ? "Registering..." : "Register"
-              )
-            )
-          )
+        // Submit Button
+        React.createElement(
+          "button",
+          {
+            type: "submit",
+            disabled: isSubmitting,
+            className: "submit-btn",
+          },
+          isSubmitting ? "Registering..." : "Register"
         )
       );
     }
