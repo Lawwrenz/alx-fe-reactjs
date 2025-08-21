@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
-  // State for individual form fields (not using a single formData object)
+  // State for individual form fields
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,16 +41,19 @@ const RegistrationForm = () => {
     let isValid = true;
     const newErrors = { username: '', email: '', password: '' };
 
+    // ✅ Explicit check for username
     if (!username.trim()) {
       newErrors.username = 'Username is required';
       isValid = false;
     }
 
+    // ✅ Explicit check for email
     if (!email.trim()) {
       newErrors.email = 'Email is required';
       isValid = false;
     }
 
+    // ✅ Explicit check for password
     if (!password.trim()) {
       newErrors.password = 'Password is required';
       isValid = false;
@@ -90,7 +93,7 @@ const RegistrationForm = () => {
             type="text"
             id="username"
             name="username"
-            value={username}  // ✅ Explicit value={username}
+            value={username}
             onChange={handleUsernameChange}
             className={errors.username ? 'error' : ''}
             placeholder="Enter your username"
@@ -105,7 +108,7 @@ const RegistrationForm = () => {
             type="email"
             id="email"
             name="email"
-            value={email}  // ✅ Explicit value={email}
+            value={email}
             onChange={handleEmailChange}
             className={errors.email ? 'error' : ''}
             placeholder="Enter your email"
@@ -120,7 +123,7 @@ const RegistrationForm = () => {
             type="password"
             id="password"
             name="password"
-            value={password}  // ✅ Explicit value={password}
+            value={password}
             onChange={handlePasswordChange}
             className={errors.password ? 'error' : ''}
             placeholder="Enter your password"
