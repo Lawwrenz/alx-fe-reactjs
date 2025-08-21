@@ -41,20 +41,20 @@ const RegistrationForm = () => {
     let isValid = true;
     const newErrors = { username: '', email: '', password: '' };
 
-    // ✅ Explicit check for username
-    if (!username.trim()) {
+    // ✅ Exact pattern: if (!username)
+    if (!username) {
       newErrors.username = 'Username is required';
       isValid = false;
     }
 
-    // ✅ Explicit check for email
-    if (!email.trim()) {
+    // ✅ Exact pattern: if (!email) 
+    if (!email) {
       newErrors.email = 'Email is required';
       isValid = false;
     }
 
-    // ✅ Explicit check for password
-    if (!password.trim()) {
+    // ✅ Exact pattern: if (!password)
+    if (!password) {
       newErrors.password = 'Password is required';
       isValid = false;
     }
