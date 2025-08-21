@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import "./FormikForm.css";
 
 const FormikForm = () => {
-  // Validation schema using Yup
+  // Validation schema using Yup with exact string().required pattern
   const validationSchema = Yup.object({
     username: Yup.string()
       .required("Username is required")
