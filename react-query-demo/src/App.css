@@ -1,0 +1,131 @@
+/* src/App.css */
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.app h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.posts-container {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.controls button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.toggle-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.toggle-btn:hover {
+  background-color: #0056b3;
+}
+
+.refetch-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.refetch-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.refetch-btn:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.retry-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background-color: #c82333;
+}
+
+.loading, .error, .cache-info {
+  text-align: center;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.loading {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.cache-info {
+  background-color: #d4edda;
+  color: #155724;
+  margin-bottom: 20px;
+}
+
+.posts-list {
+  display: grid;
+  gap: 15px;
+}
+
+.posts-list h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.post-card {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #007bff;
+}
+
+.post-card h3 {
+  margin: 0 0 10px 0;
+  color: #007bff;
+  font-size: 1.1em;
+}
+
+.post-card p {
+  margin: 0 0 10px 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.post-meta {
+  font-size: 0.8em;
+  color: #888;
+  font-style: italic;
+}
