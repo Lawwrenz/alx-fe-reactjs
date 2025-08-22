@@ -22,7 +22,7 @@ const ProfileSettings = () => {
         <button type="submit">Save Settings</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileSettings
+export default ProfileSettings;

@@ -1,7 +1,7 @@
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
 
 const ProfileDetails = () => {
-  const { user } = useAuth()
+  const { user } = useAuth();
   
   return (
     <div className="profile-details">
@@ -12,7 +12,7 @@ const ProfileDetails = () => {
         <p><strong>Member since:</strong> January 2023</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileDetails
+export default ProfileDetails;
